@@ -1,4 +1,4 @@
-Stock Market Simulation Application
+Stock Market Simulator
 ===
 
 
