@@ -1,7 +1,6 @@
 package com.kuzdowicz.exercises.stockmarketapp.services;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,17 +36,14 @@ public class StockMarketServiceImpl implements StockMarketService {
 	}
 
 	@Override
-	public BigDecimal calculateStockPriceBasedOnTradesRecordedInPastMinutesFor(Stock stock, int minutes) {
+	public BigDecimal calculateLastStockPriceFor(Stock stock, int minutes) {
 
-		List<Trade> tradesFromLastMinutes = getTradeRecordsByTimeFor(stock, 15);
-		int tradesCount = tradesFromLastMinutes.size();
+		List<Trade> tradesFromLastMinutes = getTradeRecordsByTimeFor(stock, minutes);
 
-		return tradesFromLastMinutes.parallelStream()//
-				.map(t -> {
-					return t.getPrice()//
-							.multiply(new BigDecimal(t.getQuantity(), new MathContext(BigDecimal.ROUND_HALF_UP)));
-				}).reduce(BigDecimal.ZERO, BigDecimal::add)//
-				.divide(new BigDecimal(tradesCount), FinancialUtils.ROUND);
+		BigDecimal currentStockPrice = FinancialUtils.calculateStockPriceFor(tradesFromLastMinutes);
+		stock.setTickerPrice(currentStockPrice);
+
+		return currentStockPrice;
 	}
 
 	private List<Trade> getTradeRecordsByTimeFor(Stock stock, int minutes) {

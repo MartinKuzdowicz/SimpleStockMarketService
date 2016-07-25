@@ -12,7 +12,7 @@ public interface StockMarketService {
 
 	List<Stock> getAllStocks();
 
-	BigDecimal calculateStockPriceBasedOnTradesRecordedInPastMinutesFor(Stock stock, int minutes);
+	BigDecimal calculateLastStockPriceFor(Stock stock, int minutes);
 
 	Stock findOneStockBy(String symbol);
 
