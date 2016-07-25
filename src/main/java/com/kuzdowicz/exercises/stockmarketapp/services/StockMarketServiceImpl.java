@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kuzdowicz.exercises.stockmarketapp.domain.Stock;
 import com.kuzdowicz.exercises.stockmarketapp.domain.Trade;
+import com.kuzdowicz.exercises.stockmarketapp.helpers.FinancialMathCalculator;
 import com.kuzdowicz.exercises.stockmarketapp.repositories.StocksRepository;
-import com.kuzdowicz.exercises.stockmarketapp.utils.FinancialUtils;
 
 @Service
 @Transactional
@@ -20,9 +20,12 @@ public class StockMarketServiceImpl implements StockMarketService {
 
 	private final StocksRepository stocksRepository;
 
+	private final FinancialMathCalculator financialMathCalculator;
+
 	@Autowired
-	public StockMarketServiceImpl(StocksRepository stocksRepository) {
+	public StockMarketServiceImpl(StocksRepository stocksRepository, FinancialMathCalculator financialMathCalculator) {
 		this.stocksRepository = stocksRepository;
+		this.financialMathCalculator = financialMathCalculator;
 	}
 
 	@Override
@@ -40,7 +43,7 @@ public class StockMarketServiceImpl implements StockMarketService {
 
 		List<Trade> tradesFromLastMinutes = getTradeRecordsByTimeFor(stock, minutes);
 
-		BigDecimal currentStockPrice = FinancialUtils.calculateStockPriceFor(tradesFromLastMinutes);
+		BigDecimal currentStockPrice = financialMathCalculator.calculateStockPriceFor(tradesFromLastMinutes);
 		stock.setTickerPrice(currentStockPrice);
 
 		return currentStockPrice;

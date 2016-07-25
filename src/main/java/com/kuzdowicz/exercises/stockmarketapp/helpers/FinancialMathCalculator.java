@@ -1,31 +1,38 @@
-package com.kuzdowicz.exercises.stockmarketapp.utils;
+package com.kuzdowicz.exercises.stockmarketapp.helpers;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.kuzdowicz.exercises.stockmarketapp.domain.Trade;
 
-public class FinancialUtils {
+@Component
+public class FinancialMathCalculator {
 
 	public final static int ROUND = BigDecimal.ROUND_HALF_UP;
 
 	public final static MathContext MATH_CONTEXT = new MathContext(BigDecimal.ROUND_HALF_UP);
 
-	public static BigDecimal calculateDividendYield() {
+	public BigDecimal calculateDividendYield() {
 
 		return null;
 
 	}
 
-	public static BigDecimal calculatePERatio() {
+	public BigDecimal calculatePERatio() {
 
 		return null;
 
 	}
 
-	public static BigDecimal geometricMean(List<BigDecimal> stocksLastPrices) {
+	public BigDecimal calculateLastDividend() {
+		return null;
+	}
+
+	public BigDecimal geometricMean(List<BigDecimal> stocksLastPrices) {
 
 		BigDecimal tickerPricesMultiplyed = stocksLastPrices.parallelStream().reduce(BigDecimal.ZERO,
 				BigDecimal::multiply);
@@ -36,7 +43,7 @@ public class FinancialUtils {
 
 	}
 
-	public static BigDecimal calculateStockPriceFor(List<Trade> trades) {
+	public BigDecimal calculateStockPriceFor(List<Trade> trades) {
 
 		BigDecimal sumPriceTimesQty = trades.parallelStream()//
 				.map(t -> t.getPrice().multiply(new BigDecimal(t.getQuantity(), MATH_CONTEXT)))//

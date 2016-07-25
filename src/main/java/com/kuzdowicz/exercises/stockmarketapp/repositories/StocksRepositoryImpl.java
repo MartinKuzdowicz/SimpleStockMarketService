@@ -28,8 +28,7 @@ public class StocksRepositoryImpl implements StocksRepository {
 
 	private void loadStocks() {
 
-		saveOrUpdate(new Stock("TEA", "TEA Company Co", //
-				new BigDecimal("100.89"), COMMON, new BigDecimal("20.67")));
+		saveOrUpdate(new Stock("TEA", new BigDecimal("100.89"), COMMON, new BigDecimal("20.67")));
 
 	}
 
