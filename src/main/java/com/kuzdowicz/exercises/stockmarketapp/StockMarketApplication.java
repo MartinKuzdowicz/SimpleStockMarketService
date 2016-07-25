@@ -1,4 +1,4 @@
-package com.kuzdowicz.exercises;
+package com.kuzdowicz.exercises.stockmarketapp;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
