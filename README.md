@@ -1,6 +1,7 @@
-Stock Market Simulator
+Simple Stock Market Service
 ===
 
+Application in progress ...
 
 
 

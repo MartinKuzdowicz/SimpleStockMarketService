@@ -1,12 +1,14 @@
-package com.kuzdowicz.stockmarketapp.domain;
+package com.kuzdowicz.exercises.stockmarketapp.domain;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kuzdowicz.stockmarketapp.constants.StockType;
+import com.kuzdowicz.exercises.stockmarketapp.constants.StockType;
 
 public class Stock {
+
+	/* sprawdz czy nie musi byc ilosc !!!!!! */
 
 	private final String tickerSymbol;
 	private final String companyName;
@@ -25,16 +27,8 @@ public class Stock {
 		this.fixedDividend = fixedDividend;
 	}
 
-	private long volume;
 	private BigDecimal lastDividend;
-
-	public long getVolume() {
-		return volume;
-	}
-
-	public void setVolume(long volume) {
-		this.volume = volume;
-	}
+	private BigDecimal tickerPrice;
 
 	public BigDecimal getLastDividend() {
 		return lastDividend;
@@ -66,6 +60,14 @@ public class Stock {
 
 	public List<Trade> getTrades() {
 		return trades;
+	}
+
+	public BigDecimal getTickerPrice() {
+		return tickerPrice;
+	}
+
+	public void setTickerPrice(BigDecimal tickerPrice) {
+		this.tickerPrice = tickerPrice;
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.kuzdowicz.stockmarketapp.utils;
+package com.kuzdowicz.exercises.stockmarketapp.utils;
 
 import java.math.BigDecimal;
 

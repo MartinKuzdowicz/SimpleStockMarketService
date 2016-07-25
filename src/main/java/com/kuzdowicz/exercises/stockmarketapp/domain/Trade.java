@@ -1,19 +1,20 @@
-package com.kuzdowicz.stockmarketapp.domain;
+package com.kuzdowicz.exercises.stockmarketapp.domain;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import org.joda.time.DateTime;
 
-import com.kuzdowicz.stockmarketapp.constants.Indicator;
+import com.kuzdowicz.exercises.stockmarketapp.constants.Indicator;
 
 public class Trade {
 
 	private final BigDecimal price;
-	private final long quantity;
+	private final BigInteger quantity;
 	private final Indicator indicator;
 	private final DateTime timestamp;
 
-	public Trade(BigDecimal price, long quantity, Indicator indicator, DateTime timestamp) {
+	public Trade(BigDecimal price, BigInteger quantity, Indicator indicator, DateTime timestamp) {
 		this.price = price;
 		this.quantity = quantity;
 		this.indicator = indicator;
@@ -24,7 +25,7 @@ public class Trade {
 		return price;
 	}
 
-	public long getQuantity() {
+	public BigInteger getQuantity() {
 		return quantity;
 	}
 
@@ -35,7 +36,5 @@ public class Trade {
 	public DateTime getTimestamp() {
 		return timestamp;
 	}
-	
-	
 
 }
