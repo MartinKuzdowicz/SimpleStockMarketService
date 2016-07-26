@@ -16,9 +16,16 @@ public class FinancialMathCalculator {
 
 	public final static MathContext MATH_CONTEXT = new MathContext(BigDecimal.ROUND_HALF_UP);
 
-	public BigDecimal calculateDividendYield() {
+	public BigDecimal calculateDividendYieldForCommon(BigDecimal tickerPrice, int dividendRate) {
 
-		return null;
+		return new BigDecimal(dividendRate).divide(tickerPrice, ROUND);
+
+	}
+
+	public BigDecimal calculateDividendYieldForPreferred(BigDecimal tickerPrice, BigDecimal parValue,
+			int dividendRate) {
+
+		return new BigDecimal(dividendRate).multiply(parValue, MATH_CONTEXT).divide(tickerPrice, ROUND);
 
 	}
 
@@ -26,10 +33,6 @@ public class FinancialMathCalculator {
 
 		return null;
 
-	}
-
-	public BigDecimal calculateLastDividend() {
-		return null;
 	}
 
 	public BigDecimal geometricMean(List<BigDecimal> stocksLastPrices) {

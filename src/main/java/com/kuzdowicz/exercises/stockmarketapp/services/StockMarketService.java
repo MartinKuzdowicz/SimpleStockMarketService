@@ -7,7 +7,7 @@ import com.kuzdowicz.exercises.stockmarketapp.domain.Stock;
 import com.kuzdowicz.exercises.stockmarketapp.domain.Trade;
 
 public interface StockMarketService {
-
+	
 	void recordTradeForStock(String stockId, Trade trade);
 
 	List<Stock> getAllStocks();

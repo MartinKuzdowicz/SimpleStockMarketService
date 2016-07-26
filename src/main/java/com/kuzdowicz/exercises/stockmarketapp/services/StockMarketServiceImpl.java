@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kuzdowicz.exercises.stockmarketapp.config.AppConfig;
 import com.kuzdowicz.exercises.stockmarketapp.domain.Stock;
 import com.kuzdowicz.exercises.stockmarketapp.domain.Trade;
 import com.kuzdowicz.exercises.stockmarketapp.helpers.FinancialMathCalculator;
@@ -67,8 +68,13 @@ public class StockMarketServiceImpl implements StockMarketService {
 
 	@Override
 	public BigDecimal calculateAllShareIndex() {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<BigDecimal> allStocksPrices = getAllStocks().stream()//
+				.map(s -> calculateLastStockPriceFor(s,
+						AppConfig.TIME_IN_MIN_INTERVAL_FOR_CACLULATING_LAST_STOCK_PRICE))//
+				.collect(Collectors.toList());
+
+		return financialMathCalculator.geometricMean(allStocksPrices);
 	}
 
 }
