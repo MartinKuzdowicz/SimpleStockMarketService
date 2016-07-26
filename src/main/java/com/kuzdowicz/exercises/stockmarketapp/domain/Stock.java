@@ -1,36 +1,42 @@
 package com.kuzdowicz.exercises.stockmarketapp.domain;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.kuzdowicz.exercises.stockmarketapp.constants.StockType;
 
 public class Stock {
 
 	private final String tickerSymbol;
 	private final BigDecimal parValue;
-	private final StockType type;
-	private final Integer fixedDividendRate;
+	private final BigInteger nrOfSharesInIssue;
+
+	private final Dividend dividend;
 
 	private final List<Trade> trades = new ArrayList<>();
 
-	public Stock(String tickerSymbol, BigDecimal parValue, StockType type, Integer fixedDividendRate) {
+	public Stock(String tickerSymbol, BigDecimal parValue, BigInteger nrOfSharesInIssue, Dividend dividend) {
 		this.tickerSymbol = tickerSymbol;
 		this.parValue = parValue;
-		this.type = type;
-		this.fixedDividendRate = fixedDividendRate;
+		this.nrOfSharesInIssue = nrOfSharesInIssue;
+		this.dividend = dividend;
 	}
 
-	private Integer lastDividendRate;
+	public Stock(String tickerSymbol, BigDecimal parValue, BigInteger nrOfSharesInIssue) {
+		this.tickerSymbol = tickerSymbol;
+		this.parValue = parValue;
+		this.nrOfSharesInIssue = nrOfSharesInIssue;
+		dividend = null;
+	}
+
 	private BigDecimal tickerPrice;
 
-	public Integer getLastDividendRate() {
-		return lastDividendRate;
+	public BigDecimal getTickerPrice() {
+		return tickerPrice;
 	}
 
-	public void setLastDividend(Integer lastDividendRate) {
-		this.lastDividendRate = lastDividendRate;
+	public void setTickerPrice(BigDecimal tickerPrice) {
+		this.tickerPrice = tickerPrice;
 	}
 
 	public String getTickerSymbol() {
@@ -41,24 +47,16 @@ public class Stock {
 		return parValue;
 	}
 
-	public StockType getType() {
-		return type;
+	public BigInteger getNrOfSharesInIssue() {
+		return nrOfSharesInIssue;
 	}
 
-	public Integer getFixedDividendRate() {
-		return fixedDividendRate;
+	public Dividend getDividend() {
+		return dividend;
 	}
 
 	public List<Trade> getTrades() {
 		return trades;
-	}
-
-	public BigDecimal getTickerPrice() {
-		return tickerPrice;
-	}
-
-	public void setTickerPrice(BigDecimal tickerPrice) {
-		this.tickerPrice = tickerPrice;
 	}
 
 }

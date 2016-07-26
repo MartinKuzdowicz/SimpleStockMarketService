@@ -1,4 +1,4 @@
-Simple Stock Market Service for Global Beverage Corporation Exchange
+Simple Stock Market Service
 ===
 
 Application in progress ...

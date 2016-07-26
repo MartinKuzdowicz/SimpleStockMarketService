@@ -28,18 +28,22 @@ public class FinancialMathCalculator {
 		return lastDividenVal.multiply(parValue, MATH_CONTEXT).divide(tickerPrice, ROUND);
 
 	}
-	
-	public BigDecimal caclulateLastDividendVal(){
-		return null;
-	}
-	
-	public BigDecimal caclulateFixedDividendVal(){
-		return null;
+
+	public BigDecimal caclulateCommonDividendPerShareVal(BigDecimal tickerPrice, BigInteger nrOfSharesInIssue,
+			BigDecimal dividendRate) {
+
+		return tickerPrice.multiply(new BigDecimal(nrOfSharesInIssue), MATH_CONTEXT).multiply(dividendRate,
+				MATH_CONTEXT);
 	}
 
-	public BigDecimal calculatePERatio() {
+	public BigDecimal caclulateFixedDividendVal(BigDecimal parValue, BigDecimal dividendRate) {
 
-		return null;
+		return parValue.multiply(dividendRate, MATH_CONTEXT);
+	}
+
+	public BigDecimal calculatePERatio(BigDecimal tickerPrice, BigDecimal dividendVal) {
+
+		return tickerPrice.divide(dividendVal, ROUND);
 
 	}
 

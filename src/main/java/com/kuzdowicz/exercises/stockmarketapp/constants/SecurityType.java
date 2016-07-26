@@ -1,5 +1,5 @@
 package com.kuzdowicz.exercises.stockmarketapp.constants;
 
-public enum StockType {
+public enum SecurityType {
 	COMMON, PREFFERED
 }
