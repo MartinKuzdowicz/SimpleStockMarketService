@@ -1,20 +1,24 @@
 package com.kuzdowicz.exercises.stockmarketapp.database;
 
-import static com.kuzdowicz.exercises.stockmarketapp.constants.SecurityType.COMMON;
-
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.kuzdowicz.exercises.stockmarketapp.domain.Dividend;
 import com.kuzdowicz.exercises.stockmarketapp.domain.Stock;
 import com.kuzdowicz.exercises.stockmarketapp.domain.Trade;
+import com.kuzdowicz.exercises.stockmarketapp.factories.StockFactory;
 
 @Component
 public class StockMarketAppDB {
+
+	private final StockFactory stockFactory;
+
+	@Autowired
+	public StockMarketAppDB(StockFactory stockFactory) {
+		this.stockFactory = stockFactory;
+	}
 
 	private final Map<String, Stock> stocks = new HashMap<>();
 	private final Map<String, HashMap<Integer, Trade>> trades = new HashMap<>();
@@ -28,8 +32,9 @@ public class StockMarketAppDB {
 	}
 
 	public void loadStocksToDB() {
-		Dividend TeaDividend = new Dividend(COMMON, new BigDecimal(0.006));
-		stocks.put("TEA", new Stock("TEA", new BigDecimal("100.89"), new BigInteger("365900"), TeaDividend));
+
+		stocks.put("TEA", stockFactory.createCommonStock("TEA", "100.89", "365900", "0.006"));
+
 	}
 
 }

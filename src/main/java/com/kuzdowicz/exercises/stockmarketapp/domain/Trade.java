@@ -9,12 +9,14 @@ import com.kuzdowicz.exercises.stockmarketapp.constants.Indicator;
 
 public class Trade {
 
+	private final String ticker;
 	private final BigDecimal price;
 	private final BigInteger quantity;
 	private final Indicator indicator;
 	private final DateTime timestamp;
 
-	public Trade(BigDecimal price, BigInteger quantity, Indicator indicator, DateTime timestamp) {
+	public Trade(String ticker, BigDecimal price, BigInteger quantity, Indicator indicator, DateTime timestamp) {
+		this.ticker = ticker;
 		this.price = price;
 		this.quantity = quantity;
 		this.indicator = indicator;
@@ -35,6 +37,10 @@ public class Trade {
 
 	public DateTime getTimestamp() {
 		return timestamp;
+	}
+
+	public String getTicker() {
+		return ticker;
 	}
 
 }

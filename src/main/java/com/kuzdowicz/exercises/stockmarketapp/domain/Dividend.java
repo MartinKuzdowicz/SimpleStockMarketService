@@ -7,28 +7,23 @@ import com.kuzdowicz.exercises.stockmarketapp.constants.SecurityType;
 public class Dividend {
 
 	private final SecurityType type;
-	private final BigDecimal fixedDividendRate;
-	private BigDecimal lastDividendRate;
+	private BigDecimal dividendRate;
 
-	public Dividend(SecurityType type, BigDecimal fixedDividendRate) {
+	public Dividend(SecurityType type, BigDecimal dividendRate) {
 		this.type = type;
-		this.fixedDividendRate = fixedDividendRate;
+		this.dividendRate = dividendRate;
+	}
+
+	public BigDecimal getDividendRate() {
+		return dividendRate;
+	}
+
+	public void setDividendRate(BigDecimal dividendRate) {
+		this.dividendRate = dividendRate;
 	}
 
 	public SecurityType getType() {
 		return type;
-	}
-
-	public BigDecimal getFixedDividendRate() {
-		return fixedDividendRate;
-	}
-
-	public BigDecimal getLastDividendRate() {
-		return lastDividendRate;
-	}
-
-	public void setLastDividendRate(BigDecimal lastDividendRate) {
-		this.lastDividendRate = lastDividendRate;
 	}
 
 }

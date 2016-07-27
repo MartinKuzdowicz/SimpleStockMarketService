@@ -17,14 +17,14 @@ import com.kuzdowicz.exercises.stockmarketapp.repositories.StocksRepository;
 
 @Service
 @Transactional
-public class StockMarketServiceImpl implements StockMarketService {
+public class StockServiceImpl implements StockService {
 
 	private final StocksRepository stocksRepository;
 
 	private final FinancialMathCalculator financialMathCalculator;
 
 	@Autowired
-	public StockMarketServiceImpl(StocksRepository stocksRepository, FinancialMathCalculator financialMathCalculator) {
+	public StockServiceImpl(StocksRepository stocksRepository, FinancialMathCalculator financialMathCalculator) {
 		this.stocksRepository = stocksRepository;
 		this.financialMathCalculator = financialMathCalculator;
 	}
@@ -70,8 +70,8 @@ public class StockMarketServiceImpl implements StockMarketService {
 	public BigDecimal calculateAllShareIndex() {
 
 		List<BigDecimal> allStocksPrices = getAllStocks().stream()//
-				.map(s -> calculateLastStockPriceFor(s,
-						AppConfig.TIME_IN_MIN_INTERVAL_FOR_CACLULATING_LAST_STOCK_PRICE))//
+				.map(s -> calculateLastStockPriceFor(s, AppConfig.TIME_IN_MIN_INTERVAL_FOR_CACLULATING_LAST_STOCK_PRICE)//
+						.multiply(new BigDecimal(s.getNrOfSharesInIssue())))//
 				.collect(Collectors.toList());
 
 		return financialMathCalculator.geometricMean(allStocksPrices);
