@@ -5,7 +5,7 @@ import java.math.BigInteger;
 
 public interface TradingService {
 
-	void byStock(String ticker, BigDecimal price, BigInteger qty);
+	void buyStock(String ticker, BigDecimal price, BigInteger qty);
 
 	void sellStock(String ticker, BigDecimal price, BigInteger qty);
 

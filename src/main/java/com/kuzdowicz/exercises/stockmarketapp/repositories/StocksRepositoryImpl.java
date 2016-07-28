@@ -1,7 +1,9 @@
 package com.kuzdowicz.exercises.stockmarketapp.repositories;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -36,6 +38,18 @@ public class StocksRepositoryImpl implements StocksRepository {
 	@Override
 	public Stock findOne(String id) {
 		return stockMarketAppDB.getStocks().get(id);
+	}
+
+	@Override
+	public void updateTickerPrice(String id, BigDecimal price) {
+
+		stockMarketAppDB.getStocks().get(id).setLastPrice(price);
+
+	}
+
+	@Override
+	public Set<String> findAllTickerSymbols() {
+		return stockMarketAppDB.getStocks().keySet();
 	}
 
 }

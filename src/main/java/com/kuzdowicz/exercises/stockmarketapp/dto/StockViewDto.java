@@ -1,15 +1,19 @@
 package com.kuzdowicz.exercises.stockmarketapp.dto;
 
+import java.math.BigDecimal;
+
+import com.kuzdowicz.exercises.stockmarketapp.constants.SecurityType;
+
 public class StockViewDto {
 
 	private String ticker;
-	private String type;
-	private String stockPrice;
-	private String lastDividend;
-	private String fixedDividend;
-	private String dividendYield;
-	private String parValue;
-	private String PERatio;
+	private SecurityType type;
+	private BigDecimal stockPrice;
+	private BigDecimal lastDividend;
+	private BigDecimal fixedDividend;
+	private BigDecimal dividendYield;
+	private BigDecimal parValue;
+	private BigDecimal PERatio;
 
 	public String getTicker() {
 		return ticker;
@@ -19,60 +23,60 @@ public class StockViewDto {
 		this.ticker = ticker;
 	}
 
-	public String getType() {
+	public SecurityType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(SecurityType type) {
 		this.type = type;
 	}
 
-	public String getLastDividend() {
-		return lastDividend;
-	}
-
-	public void setLastDividend(String lastDividend) {
-		this.lastDividend = lastDividend;
-	}
-
-	public String getFixedDividend() {
-		return fixedDividend;
-	}
-
-	public void setFixedDividend(String fixedDividend) {
-		this.fixedDividend = fixedDividend;
-	}
-
-	public String getDividendYield() {
-		return dividendYield;
-	}
-
-	public void setDividendYield(String dividendYield) {
-		this.dividendYield = dividendYield;
-	}
-
-	public String getParValue() {
-		return parValue;
-	}
-
-	public void setParValue(String parValue) {
-		this.parValue = parValue;
-	}
-
-	public String getPERatio() {
-		return PERatio;
-	}
-
-	public void setPERatio(String pERatio) {
-		PERatio = pERatio;
-	}
-
-	public String getStockPrice() {
+	public BigDecimal getStockPrice() {
 		return stockPrice;
 	}
 
-	public void setStockPrice(String stockPrice) {
+	public void setStockPrice(BigDecimal stockPrice) {
 		this.stockPrice = stockPrice;
+	}
+
+	public BigDecimal getLastDividend() {
+		return lastDividend;
+	}
+
+	public void setLastDividend(BigDecimal lastDividend) {
+		this.lastDividend = lastDividend;
+	}
+
+	public BigDecimal getFixedDividend() {
+		return fixedDividend;
+	}
+
+	public void setFixedDividend(BigDecimal fixedDividend) {
+		this.fixedDividend = fixedDividend;
+	}
+
+	public BigDecimal getDividendYield() {
+		return dividendYield;
+	}
+
+	public void setDividendYield(BigDecimal dividendYield) {
+		this.dividendYield = dividendYield;
+	}
+
+	public BigDecimal getParValue() {
+		return parValue;
+	}
+
+	public void setParValue(BigDecimal parValue) {
+		this.parValue = parValue;
+	}
+
+	public BigDecimal getPERatio() {
+		return PERatio;
+	}
+
+	public void setPERatio(BigDecimal pERatio) {
+		PERatio = pERatio;
 	}
 
 }

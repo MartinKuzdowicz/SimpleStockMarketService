@@ -17,11 +17,11 @@ public class ExchangeAdministrator {
 
 	private final StocksRepository stocksRepository;
 
-	private final StockService stockService;
+	private final StockDataService stockService;
 
 	@Autowired
 	public ExchangeAdministrator(StockFactory stockFactory, StocksRepository stocksRepository,
-			StockService stockService) {
+			StockDataService stockService) {
 		this.stockFactory = stockFactory;
 		this.stocksRepository = stocksRepository;
 		this.stockService = stockService;
@@ -49,22 +49,22 @@ public class ExchangeAdministrator {
 
 	public void printCurrentStockData() {
 
-		stocksRepository.findAll().forEach(s -> {
+		stocksRepository.findAllTickerSymbols().forEach(tickerSym -> {
 
-			StockViewDto sqv = stockService.assemblyDataToStockQuote(s);
+			StockViewDto sqv = stockService.assemblyAllCalculationsToStockQuoteFor(tickerSym);
 
 			String ticker = sqv.getTicker();
-			String secType = sqv.getType();
-			String lastDivid = sqv.getLastDividend();
-			String fixedDivid = sqv.getFixedDividend();
-			String dividendYield = sqv.getDividendYield();
-			String parVal = sqv.getParValue();
-			String peRatio = sqv.getPERatio();
-			String price = sqv.getStockPrice();
+			String secType = sqv.getType().name();
+			String lastDivid = sqv.getLastDividend().toString();
+			String fixedDivid = sqv.getFixedDividend() != null ? sqv.getFixedDividend().toString() : " ";
+			String dividendYield = sqv.getDividendYield().toString();
+			String parVal = sqv.getParValue().toString();
+			String peRatio = sqv.getPERatio().toString();
+			String price = sqv.getStockPrice().toString();
 
 			System.out.println(ticker + " | " + secType + " | " + lastDivid + " | " + fixedDivid + " | " + dividendYield
 					+ " | " + parVal + " | " + peRatio + " | " + price);
-
+			
 		});
 
 	}

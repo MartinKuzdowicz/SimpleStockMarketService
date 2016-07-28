@@ -3,6 +3,7 @@ package com.kuzdowicz.exercises.stockmarketapp.services;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ import com.kuzdowicz.exercises.stockmarketapp.repositories.TradesRepository;
 @Service
 public class TradingServiceImpl implements TradingService {
 
+	private final static Logger logger = Logger.getLogger(TradingServiceImpl.class);
+
 	private final TradesRepository tradesRepository;
 
 	@Autowired
@@ -22,8 +25,8 @@ public class TradingServiceImpl implements TradingService {
 	}
 
 	@Override
-	public void byStock(String ticker, BigDecimal price, BigInteger qty) {
-
+	public void buyStock(String ticker, BigDecimal price, BigInteger qty) {
+		logger.debug(ticker + " buy ");
 		Trade newBuyTradeAction = new Trade(ticker, price, qty, Indicator.BUY, DateTime.now());
 
 		tradesRepository.recordTrade(newBuyTradeAction);
@@ -32,7 +35,7 @@ public class TradingServiceImpl implements TradingService {
 
 	@Override
 	public void sellStock(String ticker, BigDecimal price, BigInteger qty) {
-
+		logger.debug(ticker + " SELL ");
 		Trade newSellTradeAction = new Trade(ticker, price, qty, Indicator.SELL, DateTime.now());
 
 		tradesRepository.recordTrade(newSellTradeAction);

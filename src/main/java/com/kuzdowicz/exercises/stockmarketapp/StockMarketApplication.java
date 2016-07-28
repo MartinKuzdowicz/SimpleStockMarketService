@@ -39,10 +39,11 @@ public class StockMarketApplication {
 		System.out.println();
 
 		admin.printCurrentStockData();
+		System.out.println("----------------------------------------------------------------------------------------");
 
-		tradingService.byStock("TEA", new BigDecimal("30.67"), new BigInteger("10"));
+		tradingService.buyStock("TEA", new BigDecimal("30.67"), new BigInteger("10"));
 
-		tradingService.byStock("TEA", new BigDecimal("50.67"), new BigInteger("3"));
+		tradingService.buyStock("TEA", new BigDecimal("50.67"), new BigInteger("3"));
 
 		admin.printCurrentStockData();
 
