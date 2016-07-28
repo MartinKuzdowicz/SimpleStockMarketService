@@ -114,7 +114,7 @@ public class StockDataServiceImpl implements StockDataService {
 
 		sqv.setStockPrice(currentTickerPrice);
 
-		if (stock.getDividend().getType().equals(SecurityType.PREFFERED)) {
+		if (stock.getDividend().getType().equals(SecurityType.PREFERRED)) {
 
 			BigDecimal divid = financialMathCalculator.caclulateFixedDividendVal(parVal, dividRate);
 			sqv.setFixedDividend(divid);
