@@ -10,17 +10,22 @@ public class Stock {
 	private final BigInteger nrOfSharesInIssue;
 	private final Dividend dividend;
 
-	public Stock(String tickerSymbol, BigDecimal parValue, BigInteger nrOfSharesInIssue, Dividend dividend) {
+	private BigDecimal lastPrice;
+
+	public Stock(String tickerSymbol, BigDecimal parValue, BigDecimal lastPrice, BigInteger nrOfSharesInIssue,
+			Dividend dividend) {
 		this.tickerSymbol = tickerSymbol;
 		this.parValue = parValue;
 		this.nrOfSharesInIssue = nrOfSharesInIssue;
 		this.dividend = dividend;
+		this.lastPrice = lastPrice;
 	}
 
-	public Stock(String tickerSymbol, BigDecimal parValue, BigInteger nrOfSharesInIssue) {
+	public Stock(String tickerSymbol, BigDecimal parValue, BigDecimal lastPrice, BigInteger nrOfSharesInIssue) {
 		this.tickerSymbol = tickerSymbol;
 		this.parValue = parValue;
 		this.nrOfSharesInIssue = nrOfSharesInIssue;
+		this.lastPrice = lastPrice;
 		dividend = null;
 	}
 
@@ -39,5 +44,20 @@ public class Stock {
 	public Dividend getDividend() {
 		return dividend;
 	}
+
+	public BigDecimal getLastPrice() {
+		return lastPrice;
+	}
+
+	public void setLastPrice(BigDecimal lastPrice) {
+		this.lastPrice = lastPrice;
+	}
+
+	@Override
+	public String toString() {
+		return "Stock [tickerSymbol=" + tickerSymbol + ", parValue=" + parValue + ", nrOfSharesInIssue="
+				+ nrOfSharesInIssue + ", dividend=" + dividend + ", lastPrice=" + lastPrice + "]";
+	}
+	
 
 }

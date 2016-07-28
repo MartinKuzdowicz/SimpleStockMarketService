@@ -14,20 +14,11 @@ import com.kuzdowicz.exercises.stockmarketapp.repositories.TradesRepository;
 @Service
 public class TradingServiceImpl implements TradingService {
 
-	private final StockService stockService;
-
 	private final TradesRepository tradesRepository;
 
 	@Autowired
-	public TradingServiceImpl(StockService stockService, TradesRepository tradesRepository) {
-		this.stockService = stockService;
+	public TradingServiceImpl(TradesRepository tradesRepository) {
 		this.tradesRepository = tradesRepository;
-	}
-
-	@Override
-	public BigDecimal getAllShareIndex() {
-
-		return stockService.calculateAllShareIndex();
 	}
 
 	@Override

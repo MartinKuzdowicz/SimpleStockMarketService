@@ -53,6 +53,10 @@ public class TradesRepositoryImpl implements TradesRepository {
 	@Override
 	public List<Trade> getTradesByTickerRecordedBefore(String ticker, int minutes) {
 
+		if (findTradesFor(ticker) == null || findTradesFor(ticker).isEmpty()) {
+			return new ArrayList<>();
+		}
+
 		DateTime timeStampMinusMinuts = DateTime.now().minusMinutes(minutes);
 		List<Trade> tradesFromLastMinutes = findTradesFor(ticker)//
 				.parallelStream()//

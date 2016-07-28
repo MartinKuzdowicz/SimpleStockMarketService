@@ -42,9 +42,16 @@ public class StockServiceImpl implements StockService {
 		String ticker = stock.getTickerSymbol();
 		List<Trade> tradesFromLastMinutes = tradesRepository.getTradesByTickerRecordedBefore(ticker, minutes);
 
-		BigDecimal currentStockPrice = financialMathCalculator.calculateStockPriceFor(tradesFromLastMinutes);
+		if (tradesFromLastMinutes.isEmpty()) {
+			return stock.getLastPrice();
+		} else {
 
-		return currentStockPrice;
+			BigDecimal currentStockPrice = financialMathCalculator.calculateStockPriceFor(tradesFromLastMinutes);
+			stock.setLastPrice(currentStockPrice);
+			stocksRepository.saveOrUpdate(stock);
+			return currentStockPrice;
+		}
+
 	}
 
 	@Override
@@ -74,7 +81,7 @@ public class StockServiceImpl implements StockService {
 		}
 	}
 
-	private StockViewDto assemblyDataToStockQuote(Stock stock) {
+	public StockViewDto assemblyDataToStockQuote(Stock stock) {
 
 		StockViewDto sqv = new StockViewDto();
 
@@ -98,34 +105,12 @@ public class StockServiceImpl implements StockService {
 		BigDecimal dividendYield = caclulateDividendYield(stock, currentTickerPrice, lastDividend);
 		sqv.setDividendYield(dividendYield.toString());
 
+		sqv.setParValue(stock.getParValue().toString());
+		
 		BigDecimal peRatio = financialMathCalculator.calculatePERatio(currentTickerPrice, lastDividend);
-
 		sqv.setPERatio(peRatio.toString());
 
 		return sqv;
-
-	}
-
-	@Override
-	public void printCurrentStockData() {
-
-		stocksRepository.findAll().forEach(s -> {
-
-			StockViewDto sqv = assemblyDataToStockQuote(s);
-
-			String ticker = sqv.getTicker();
-			String secType = sqv.getType();
-			String lastDivid = sqv.getLastDividend();
-			String fixedDivid = sqv.getFixedDividend();
-			String dividendYield = sqv.getDividendYield();
-			String parVal = sqv.getParValue();
-			String peRatio = sqv.getPERatio();
-			String price = sqv.getStockPrice();
-
-			System.out.println(ticker + " | " + secType + " | " + lastDivid + " | " + fixedDivid + " | " + dividendYield
-					+ " | " + parVal + " | " + peRatio + " | " + price);
-
-		});
 
 	}
 

@@ -3,6 +3,7 @@ package com.kuzdowicz.exercises.stockmarketapp.services;
 import java.math.BigDecimal;
 
 import com.kuzdowicz.exercises.stockmarketapp.domain.Stock;
+import com.kuzdowicz.exercises.stockmarketapp.dto.StockViewDto;
 
 public interface StockService {
 
@@ -14,6 +15,5 @@ public interface StockService {
 
 	BigDecimal calculateAllShareIndex();
 
-	void printCurrentStockData();
-
+	StockViewDto assemblyDataToStockQuote(Stock stock);
 }
