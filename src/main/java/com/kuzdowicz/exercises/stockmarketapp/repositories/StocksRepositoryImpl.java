@@ -7,18 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kuzdowicz.exercises.stockmarketapp.database.StockMarketAppDB;
+import com.kuzdowicz.exercises.stockmarketapp.database.StockMarketDB;
 import com.kuzdowicz.exercises.stockmarketapp.domain.Stock;
-import com.kuzdowicz.exercises.stockmarketapp.domain.Trade;
 
 @Repository
 @Transactional
 public class StocksRepositoryImpl implements StocksRepository {
 
-	private final StockMarketAppDB stockMarketAppDB;
+	private final StockMarketDB stockMarketAppDB;
 
 	@Autowired
-	public StocksRepositoryImpl(StockMarketAppDB stockMarketAppDB) {
+	public StocksRepositoryImpl(StockMarketDB stockMarketAppDB) {
 		this.stockMarketAppDB = stockMarketAppDB;
 	}
 
@@ -37,11 +36,6 @@ public class StocksRepositoryImpl implements StocksRepository {
 	@Override
 	public Stock findOne(String id) {
 		return stockMarketAppDB.getStocks().get(id);
-	}
-
-	@Override
-	public void recordTradeForStock(String stockId, Trade trade) {
-		stockMarketAppDB.getStocks().get(stockId).getTrades().add(trade);
 	}
 
 }

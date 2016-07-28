@@ -4,8 +4,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.kuzdowicz.exercises.stockmarketapp.config.AppConfig;
-import com.kuzdowicz.exercises.stockmarketapp.database.StockMarketAppDB;
+import com.kuzdowicz.exercises.stockmarketapp.services.ExchangeAdministrator;
 import com.kuzdowicz.exercises.stockmarketapp.services.StockService;
+import com.kuzdowicz.exercises.stockmarketapp.services.TradingService;
 
 public class StockMarketApplication {
 
@@ -15,16 +16,22 @@ public class StockMarketApplication {
 
 		application = new AnnotationConfigApplicationContext(AppConfig.class);
 
-		StockMarketAppDB db = application.getBean(StockMarketAppDB.class);
-		db.loadStocksToDB();
+		ExchangeAdministrator admin = application.getBean(ExchangeAdministrator.class);
 
-		StockService stockMarketService = application.getBean(StockService.class);
+		admin.addCommonStockToMarket("TEA", "0.0189", "36590", "0.006");
+		
+		StockService stockService = application.getBean(StockService.class);
+		
+		TradingService tradingService = application.getBean(TradingService.class);
 
 		System.out.println("+--------+----------------+-----------+-------------+");
 		System.out.println("| Symbol | Dividend yield | P/E ratio | Stock price |");
 		System.out.println("+--------+----------------+-----------+-------------+");
+		
+		stockService.printCurrentStockData();
+		
 
-		stockMarketService.getAllStocks().forEach(s -> System.out.println(s.getTickerSymbol()));
+		
 
 	}
 

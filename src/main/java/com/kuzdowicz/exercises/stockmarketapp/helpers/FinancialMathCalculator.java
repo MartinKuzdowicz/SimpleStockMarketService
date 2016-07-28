@@ -15,6 +15,7 @@ public class FinancialMathCalculator {
 	public final static int ROUND = BigDecimal.ROUND_HALF_UP;
 
 	public final static MathContext MATH_CONTEXT = new MathContext(BigDecimal.ROUND_HALF_UP);
+	
 
 	public BigDecimal calculateDividendYieldForCommon(BigDecimal tickerPrice, BigDecimal latsDividenVal) {
 		return latsDividenVal.divide(tickerPrice, ROUND);
@@ -50,15 +51,15 @@ public class FinancialMathCalculator {
 
 	public BigDecimal calculateStockPriceFor(List<Trade> trades) {
 
-		BigDecimal sumPriceTimesQty = trades.parallelStream()//
+		BigDecimal sumOfAllPriceTimesQty = trades.parallelStream()//
 				.map(t -> t.getPrice().multiply(new BigDecimal(t.getQuantity(), MATH_CONTEXT)))//
 				.reduce(BigDecimal.ZERO, BigDecimal::add);
 
-		BigInteger sumQty = trades.stream()//
+		BigInteger allSharesCountInTrades = trades.stream()//
 				.map(t -> t.getQuantity())//
 				.reduce(BigInteger.ZERO, BigInteger::add);
 
-		BigDecimal currentStockPrice = sumPriceTimesQty.divide(new BigDecimal(sumQty), ROUND);
+		BigDecimal currentStockPrice = sumOfAllPriceTimesQty.divide(new BigDecimal(allSharesCountInTrades), ROUND);
 
 		return currentStockPrice;
 
