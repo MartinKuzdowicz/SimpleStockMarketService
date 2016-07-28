@@ -40,7 +40,7 @@ public class FinancialMathCalculator {
 
 	public BigDecimal geometricMean(List<BigDecimal> stocksLastPrices) {
 
-		BigDecimal tickerPricesMultiplyed = stocksLastPrices.parallelStream().reduce(BigDecimal.ZERO,
+		BigDecimal tickerPricesMultiplyed = stocksLastPrices.parallelStream().reduce(BigDecimal.ONE,
 				BigDecimal::multiply);
 
 		double geoMean = Math.pow(tickerPricesMultiplyed.doubleValue(), 1.0 / stocksLastPrices.size());

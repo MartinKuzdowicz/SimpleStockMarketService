@@ -106,7 +106,7 @@ public class StockServiceImpl implements StockService {
 		sqv.setDividendYield(dividendYield.toString());
 
 		sqv.setParValue(stock.getParValue().toString());
-		
+
 		BigDecimal peRatio = financialMathCalculator.calculatePERatio(currentTickerPrice, lastDividend);
 		sqv.setPERatio(peRatio.toString());
 
