@@ -2,6 +2,7 @@ package com.kuzdowicz.exercises.stockmarketapp.services;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,6 +121,11 @@ public class StocksServiceImpl implements StocksService {
 
 		return sqv;
 
+	}
+
+	@Override
+	public Set<String> getTickerSymbols() {
+		return stocksRepository.findAllTickerSymbols();
 	}
 
 }

@@ -27,9 +27,9 @@ public class StocksExchangeAdministrator {
 		this.stocksService = stocksService;
 	}
 
-	public void addCommonStockToMarket(String ticker, String parVal, String lastVal, String qty, String dividendRate) {
+	public void addCommonStockToMarket(String ticker, String parVal, String openingVal, String qty, String dividendRate) {
 
-		Stock newCommonStock = stockFactory.createCommonStock(ticker, parVal, lastVal, qty, dividendRate);
+		Stock newCommonStock = stockFactory.createCommonStock(ticker, parVal, openingVal, qty, dividendRate);
 		stocksRepository.saveOrUpdate(newCommonStock);
 
 	}

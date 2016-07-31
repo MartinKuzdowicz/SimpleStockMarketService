@@ -1,6 +1,7 @@
 package com.kuzdowicz.exercises.stockmarketapp.services;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 import com.kuzdowicz.exercises.stockmarketapp.dto.StockViewDto;
 
@@ -15,4 +16,6 @@ public interface StocksService {
 	StockViewDto assemblyAllCalculationsToStockQuoteFor(String ticker);
 
 	BigDecimal calculateAllShareIndex();
+
+	Set<String> getTickerSymbols();
 }
