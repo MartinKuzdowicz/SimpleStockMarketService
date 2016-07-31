@@ -7,12 +7,14 @@ import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kuzdowicz.exercises.stockmarketapp.constants.Indicator;
 import com.kuzdowicz.exercises.stockmarketapp.domain.Trade;
 import com.kuzdowicz.exercises.stockmarketapp.repositories.TradesRepository;
 
 @Service
+@Transactional
 public class TradingServiceImpl implements TradingService {
 
 	private final static Logger logger = Logger.getLogger(TradingServiceImpl.class);
