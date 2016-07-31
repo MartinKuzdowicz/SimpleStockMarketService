@@ -4,6 +4,7 @@ Simple Stock Market Service
 ### 1. Short description
 
 Simple Java Application for Stock Market Exchange modeling
+
 Providing functionalities like:
 
 - Begin Session and add Stocks to Market with **StocksExchangeAdministrator** class
