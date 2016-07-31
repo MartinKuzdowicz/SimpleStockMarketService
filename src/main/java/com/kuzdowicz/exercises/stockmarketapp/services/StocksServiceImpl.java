@@ -65,8 +65,7 @@ public class StocksServiceImpl implements StocksService {
 	@Override
 	public BigDecimal calculateAllShareIndex() {
 
-		List<Stock> allStocks = stocksRepository.findAll();
-		List<BigDecimal> stocksMarketCaps = allStocks.stream()//
+		List<BigDecimal> stocksMarketCaps = stocksRepository.findAll().stream()//
 				.map(s -> calculateTickerPriceFor(s.getTickerSymbol())//
 						.multiply(new BigDecimal(s.getNrOfOutstandingShares())))//
 				.collect(Collectors.toList());
@@ -92,7 +91,7 @@ public class StocksServiceImpl implements StocksService {
 	public StockViewDto assemblyAllCalculationsToStockQuoteFor(String ticker) {
 
 		Stock stock = stocksRepository.findOne(ticker);
-		
+
 		BigDecimal parVal = stock.getParValue();
 
 		StockViewDto sqv = new StockViewDto();
@@ -105,11 +104,11 @@ public class StocksServiceImpl implements StocksService {
 
 		BigDecimal lastDividendVal = stockDataCalculator.calculateLastDividendFor(stock, currentTickerPrice);
 		sqv.setLastDividend(lastDividendVal);
-		
+
 		BigDecimal dividYield = stockDataCalculator.caclulateDividendYieldFor(stock, currentTickerPrice,
 				lastDividendVal);
 		sqv.setDividendYield(dividYield);
-		
+
 		BigDecimal peRatio = stockDataCalculator.calculatePERatio(currentTickerPrice, lastDividendVal);
 		sqv.setPERatio(peRatio);
 

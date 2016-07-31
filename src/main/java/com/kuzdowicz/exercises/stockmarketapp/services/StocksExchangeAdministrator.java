@@ -44,7 +44,7 @@ public class StocksExchangeAdministrator {
 
 	public BigDecimal getAllShareIndex() {
 
-		return stocksService.calculateAllShareIndex().setScale(2, BigDecimal.ROUND_HALF_UP);
+		return stocksService.calculateAllShareIndex();
 	}
 
 	public void printCurrentStockData() {
@@ -64,7 +64,7 @@ public class StocksExchangeAdministrator {
 
 			System.out.println(ticker + " | " + secType + " | " + lastDivid + " | " + fixedDivid + " | " + dividendYield
 					+ " | " + parVal + " | " + peRatio + " | " + price);
-			
+
 		});
 
 	}
