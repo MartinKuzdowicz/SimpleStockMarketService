@@ -44,7 +44,7 @@ public class ExchangeAdministrator {
 
 	public BigDecimal getAllShareIndex() {
 
-		return stockService.calculateAllShareIndex();
+		return stockService.calculateAllShareIndex().setScale(2, BigDecimal.ROUND_HALF_UP);
 	}
 
 	public void printCurrentStockData() {

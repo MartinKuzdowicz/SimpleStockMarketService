@@ -13,6 +13,8 @@ public interface StocksRepository {
 	
 	void updateTickerPrice(String id, BigDecimal price);
 	
+	void updateLastPrice(String id, BigDecimal price);
+	
 	List<Stock> findAll();
 	
 	Set<String> findAllTickerSymbols();

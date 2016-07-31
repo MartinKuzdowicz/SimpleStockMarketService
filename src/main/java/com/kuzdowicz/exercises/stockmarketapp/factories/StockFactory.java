@@ -14,13 +14,13 @@ import com.kuzdowicz.exercises.stockmarketapp.domain.Stock;
 @Component
 public class StockFactory {
 
-	public Stock createCommonStock(String ticker, String parVal, String lastVal, String qty, String dividendRate) {
-		return new Stock(ticker, new BigDecimal(parVal), new BigDecimal(lastVal), new BigInteger(qty),
+	public Stock createCommonStock(String ticker, String parVal, String openingVal, String qty, String dividendRate) {
+		return new Stock(ticker, new BigDecimal(parVal), new BigDecimal(openingVal), new BigInteger(qty),
 				new Dividend(COMMON, new BigDecimal(dividendRate)));
 	}
 
-	public Stock createPreferredStock(String ticker, String parVal, String lastVal, String qty, String dividendRate) {
-		return new Stock(ticker, new BigDecimal(parVal), new BigDecimal(lastVal), new BigInteger(qty),
+	public Stock createPreferredStock(String ticker, String parVal, String openingVal, String qty, String dividendRate) {
+		return new Stock(ticker, new BigDecimal(parVal), new BigDecimal(openingVal), new BigInteger(qty),
 				new Dividend(PREFERRED, new BigDecimal(dividendRate)));
 	}
 }

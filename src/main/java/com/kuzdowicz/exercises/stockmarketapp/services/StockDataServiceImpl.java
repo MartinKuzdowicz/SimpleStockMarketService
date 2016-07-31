@@ -37,12 +37,16 @@ public class StockDataServiceImpl implements StockDataService {
 	}
 
 	@Override
-	public BigDecimal calculateLastStockPriceFor(String ticker, int minutes) {
+	public BigDecimal calculateTickerPriceFor(String ticker, int minutes) {
 
 		List<Trade> tradesFromLastMinutes = tradesRepository.getTradesByTickerRecordedBefore(ticker, minutes);
 
 		if (tradesFromLastMinutes.isEmpty()) {
-			return stocksRepository.findOne(ticker).getLastPrice();
+
+			if (stocksRepository.findOne(ticker).getLastPrice() != null) {
+				return stocksRepository.findOne(ticker).getLastPrice();
+			}
+			return stocksRepository.findOne(ticker).getOpeningPrice();
 		} else {
 
 			BigDecimal currentStockPrice = financialMathCalculator.calculateStockPriceFor(tradesFromLastMinutes);
@@ -56,9 +60,9 @@ public class StockDataServiceImpl implements StockDataService {
 	public BigDecimal calculateAllShareIndex() {
 
 		List<BigDecimal> stocksMarketCaps = stocksRepository.findAll().stream()//
-				.map(s -> calculateLastStockPriceFor(s.getTickerSymbol(),
+				.map(s -> calculateTickerPriceFor(s.getTickerSymbol(),
 						AppConfig.TIME_IN_MIN_INTERVAL_FOR_CACLULATING_LAST_STOCK_PRICE)//
-								.multiply(new BigDecimal(s.getNrOfSharesInIssue())))//
+								.multiply(new BigDecimal(s.getNrOfOutstandingShares())))//
 				.collect(Collectors.toList());
 
 		return financialMathCalculator.geometricMean(stocksMarketCaps);
@@ -109,7 +113,7 @@ public class StockDataServiceImpl implements StockDataService {
 		sqv.setType(stock.getDividend().getType());
 		sqv.setParValue(parVal);
 
-		BigDecimal currentTickerPrice = calculateLastStockPriceFor(ticker,
+		BigDecimal currentTickerPrice = calculateTickerPriceFor(ticker,
 				AppConfig.TIME_IN_MIN_INTERVAL_FOR_CACLULATING_LAST_STOCK_PRICE);
 
 		sqv.setStockPrice(currentTickerPrice);

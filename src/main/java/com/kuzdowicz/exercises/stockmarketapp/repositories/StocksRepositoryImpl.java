@@ -52,4 +52,9 @@ public class StocksRepositoryImpl implements StocksRepository {
 		return stockMarketAppDB.getStocks().keySet();
 	}
 
+	@Override
+	public void updateLastPrice(String id, BigDecimal price) {
+		stockMarketAppDB.getStocks().get(id).setLastPrice(price);
+	}
+
 }

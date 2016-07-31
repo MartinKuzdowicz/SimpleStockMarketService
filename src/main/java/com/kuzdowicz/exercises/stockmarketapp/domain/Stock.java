@@ -7,25 +7,26 @@ public class Stock {
 
 	private final String tickerSymbol;
 	private final BigDecimal parValue;
-	private final BigInteger nrOfSharesInIssue;
+	private final BigInteger nrOfOutstandingShares;
 	private final Dividend dividend;
+	private final BigDecimal openingPrice;
 
 	private BigDecimal lastPrice;
 
-	public Stock(String tickerSymbol, BigDecimal parValue, BigDecimal lastPrice, BigInteger nrOfSharesInIssue,
+	public Stock(String tickerSymbol, BigDecimal parValue, BigDecimal openingPrice, BigInteger nrOfOutstandingShares,
 			Dividend dividend) {
 		this.tickerSymbol = tickerSymbol;
 		this.parValue = parValue;
-		this.nrOfSharesInIssue = nrOfSharesInIssue;
+		this.nrOfOutstandingShares = nrOfOutstandingShares;
 		this.dividend = dividend;
-		this.lastPrice = lastPrice;
+		this.openingPrice = openingPrice;
 	}
 
-	public Stock(String tickerSymbol, BigDecimal parValue, BigDecimal lastPrice, BigInteger nrOfSharesInIssue) {
+	public Stock(String tickerSymbol, BigDecimal parValue, BigDecimal openingPrice, BigInteger nrOfOutstandingShares) {
 		this.tickerSymbol = tickerSymbol;
 		this.parValue = parValue;
-		this.nrOfSharesInIssue = nrOfSharesInIssue;
-		this.lastPrice = lastPrice;
+		this.nrOfOutstandingShares = nrOfOutstandingShares;
+		this.openingPrice = openingPrice;
 		dividend = null;
 	}
 
@@ -37,12 +38,16 @@ public class Stock {
 		return parValue;
 	}
 
-	public BigInteger getNrOfSharesInIssue() {
-		return nrOfSharesInIssue;
+	public BigInteger getNrOfOutstandingShares() {
+		return nrOfOutstandingShares;
 	}
 
 	public Dividend getDividend() {
 		return dividend;
+	}
+
+	public BigDecimal getOpeningPrice() {
+		return openingPrice;
 	}
 
 	public BigDecimal getLastPrice() {
@@ -52,12 +57,5 @@ public class Stock {
 	public void setLastPrice(BigDecimal lastPrice) {
 		this.lastPrice = lastPrice;
 	}
-
-	@Override
-	public String toString() {
-		return "Stock [tickerSymbol=" + tickerSymbol + ", parValue=" + parValue + ", nrOfSharesInIssue="
-				+ nrOfSharesInIssue + ", dividend=" + dividend + ", lastPrice=" + lastPrice + "]";
-	}
-	
 
 }

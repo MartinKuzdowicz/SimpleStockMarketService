@@ -6,7 +6,7 @@ import com.kuzdowicz.exercises.stockmarketapp.dto.StockViewDto;
 
 public interface StockDataService {
 
-	BigDecimal calculateLastStockPriceFor(String ticker, int minutes);
+	BigDecimal calculateTickerPriceFor(String ticker, int minutes);
 
 	BigDecimal caclulateDividendYieldFor(String ticker, BigDecimal tickerPrice, BigDecimal latsDividenVal);
 

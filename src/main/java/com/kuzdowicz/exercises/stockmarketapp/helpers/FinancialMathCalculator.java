@@ -12,18 +12,15 @@ import com.kuzdowicz.exercises.stockmarketapp.domain.Trade;
 @Component
 public class FinancialMathCalculator {
 
-	public final static int ROUND = BigDecimal.ROUND_HALF_UP;
-
 	public final static MathContext MATH_CONTEXT = new MathContext(BigDecimal.ROUND_HALF_UP);
-	
 
 	public BigDecimal calculateDividendYieldForCommon(BigDecimal tickerPrice, BigDecimal latsDividenVal) {
-		return latsDividenVal.divide(tickerPrice, ROUND);
+		return latsDividenVal.divide(tickerPrice, MATH_CONTEXT);
 	}
 
 	public BigDecimal calculateDividendYieldForPreferred(BigDecimal tickerPrice, BigDecimal parValue,
 			BigDecimal dividendRate) {
-		return parValue.multiply(dividendRate, MATH_CONTEXT).divide(tickerPrice, ROUND);
+		return parValue.multiply(dividendRate, MATH_CONTEXT).divide(tickerPrice, MATH_CONTEXT);
 	}
 
 	public BigDecimal caclulateCommonDividendPerShareVal(BigDecimal tickerPrice, BigDecimal dividendRate) {
@@ -35,15 +32,15 @@ public class FinancialMathCalculator {
 	}
 
 	public BigDecimal calculatePERatio(BigDecimal tickerPrice, BigDecimal dividendVal) {
-		return tickerPrice.divide(dividendVal, ROUND);
+		return tickerPrice.divide(dividendVal, MATH_CONTEXT);
 	}
 
 	public BigDecimal geometricMean(List<BigDecimal> stocksLastPrices) {
 
-		BigDecimal tickerPricesMultiplyed = stocksLastPrices.parallelStream().reduce(BigDecimal.ONE,
+		BigDecimal tickerPricesMultiplied = stocksLastPrices.parallelStream().reduce(BigDecimal.ONE,
 				BigDecimal::multiply);
 
-		double geoMean = Math.pow(tickerPricesMultiplyed.doubleValue(), 1.0 / stocksLastPrices.size());
+		double geoMean = Math.pow(tickerPricesMultiplied.doubleValue(), 1.0 / stocksLastPrices.size());
 
 		return new BigDecimal(geoMean);
 
@@ -59,7 +56,8 @@ public class FinancialMathCalculator {
 				.map(t -> t.getQuantity())//
 				.reduce(BigInteger.ZERO, BigInteger::add);
 
-		BigDecimal currentStockPrice = sumOfAllPriceTimesQty.divide(new BigDecimal(allSharesCountInTrades), ROUND);
+		BigDecimal currentStockPrice = sumOfAllPriceTimesQty.divide(new BigDecimal(allSharesCountInTrades),
+				MATH_CONTEXT);
 
 		return currentStockPrice;
 

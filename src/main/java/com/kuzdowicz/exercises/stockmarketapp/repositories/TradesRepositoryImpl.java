@@ -21,9 +21,12 @@ public class TradesRepositoryImpl implements TradesRepository {
 
 	private final Map<String, List<Trade>> trades;
 
+	private final StocksRepository stocksRepository;
+
 	@Autowired
-	public TradesRepositoryImpl(StockMarketDB stockMarketAppDB) {
+	public TradesRepositoryImpl(StockMarketDB stockMarketAppDB, StocksRepository stocksRepository) {
 		this.stockMarketAppDB = stockMarketAppDB;
+		this.stocksRepository = stocksRepository;
 		trades = this.stockMarketAppDB.getTrades();
 	}
 
@@ -34,6 +37,7 @@ public class TradesRepositoryImpl implements TradesRepository {
 		if (trades.containsKey(ticker)) {
 
 			trades.get(ticker).add(trade);
+			stocksRepository.updateLastPrice(ticker, trade.getPrice());
 
 		} else {
 
