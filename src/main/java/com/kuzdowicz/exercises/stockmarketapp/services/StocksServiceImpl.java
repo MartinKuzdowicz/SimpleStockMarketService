@@ -85,7 +85,7 @@ public class StocksServiceImpl implements StocksService {
 	public BigDecimal caclulateDividendYieldFor(String ticker, BigDecimal tickerPrice, BigDecimal lastDividenVal) {
 
 		Stock stock = stocksRepository.findOne(ticker);
-		return stockDataCalculator.caclulateDividendYieldFor(stock, tickerPrice, lastDividenVal);
+		return stockDataCalculator.calculateDividendYieldFor(stock, tickerPrice, lastDividenVal);
 	}
 
 	public StockViewDto assemblyAllCalculationsToStockQuoteFor(String ticker) {
@@ -105,7 +105,7 @@ public class StocksServiceImpl implements StocksService {
 		BigDecimal lastDividendVal = stockDataCalculator.calculateLastDividendFor(stock, currentTickerPrice);
 		sqv.setLastDividend(lastDividendVal);
 
-		BigDecimal dividYield = stockDataCalculator.caclulateDividendYieldFor(stock, currentTickerPrice,
+		BigDecimal dividYield = stockDataCalculator.calculateDividendYieldFor(stock, currentTickerPrice,
 				lastDividendVal);
 		sqv.setDividendYield(dividYield);
 
@@ -115,6 +115,8 @@ public class StocksServiceImpl implements StocksService {
 		if (stock.getDividend().getType().equals(SecurityType.PREFERRED)) {
 			sqv.setFixedDividend(lastDividendVal);
 		}
+		
+		sqv.setScaleInBigDecimalFieldsForPresentation();
 
 		return sqv;
 

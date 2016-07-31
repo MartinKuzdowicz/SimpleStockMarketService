@@ -15,6 +15,24 @@ public class StockViewDto {
 	private BigDecimal parValue;
 	private BigDecimal PERatio;
 
+	public void setScaleInBigDecimalFieldsForPresentation() {
+
+		this.stockPrice = this.stockPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+		if (lastDividend != null) {
+			this.lastDividend = this.lastDividend.setScale(2, BigDecimal.ROUND_HALF_UP);
+		}
+		if (fixedDividend != null) {
+			this.fixedDividend = this.fixedDividend.setScale(2, BigDecimal.ROUND_HALF_UP);
+		}
+		if (dividendYield != null) {
+			this.dividendYield = this.dividendYield.setScale(2, BigDecimal.ROUND_HALF_UP);
+		}
+		if (parValue != null) {
+			this.parValue = this.parValue.setScale(2, BigDecimal.ROUND_HALF_UP);
+		}
+		this.PERatio = this.PERatio.setScale(2, BigDecimal.ROUND_HALF_UP);
+	}
+
 	public String getTicker() {
 		return ticker;
 	}

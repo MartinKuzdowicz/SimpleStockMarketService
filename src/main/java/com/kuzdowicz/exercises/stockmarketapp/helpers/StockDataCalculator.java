@@ -30,19 +30,18 @@ public class StockDataCalculator {
 
 		if (dividend.getType().equals(SecurityType.COMMON)) {
 
-			result = financialMathCalculator.caclulateCommonDividendPerShareVal(tickerPrice,
-					dividend.getDividendRate());
+			result = financialMathCalculator.calculateDividendVal(tickerPrice, dividend.getDividendRate());
 
 		} else {
 
-			result = financialMathCalculator.caclulateFixedDividendVal(stock.getParValue(), dividend.getDividendRate());
+			result = financialMathCalculator.calculateDividendVal(stock.getParValue(), dividend.getDividendRate());
 
 		}
 
-		return result.setScale(2, BigDecimal.ROUND_HALF_UP);
+		return result;
 	}
 
-	public BigDecimal caclulateDividendYieldFor(Stock stock, BigDecimal tickerPrice, BigDecimal lastDividenVal) {
+	public BigDecimal calculateDividendYieldFor(Stock stock, BigDecimal tickerPrice, BigDecimal lastDividenVal) {
 
 		Dividend dividend = stock.getDividend();
 
@@ -58,7 +57,7 @@ public class StockDataCalculator {
 					dividend.getDividendRate());
 		}
 
-		return result.setScale(2, BigDecimal.ROUND_HALF_UP);
+		return result;
 	}
 
 	public BigDecimal calculateStockPriceFromTrades(List<Trade> trades) {
@@ -74,17 +73,17 @@ public class StockDataCalculator {
 		BigDecimal currentStockPrice = sumOfAllPriceTimesQty.divide(new BigDecimal(allSharesCountInTrades),
 				FinancialMathCalculator.MATH_CONTEXT);
 
-		return currentStockPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+		return currentStockPrice;
 
 	}
 
 	public BigDecimal calculatePERatio(BigDecimal tickerPrice, BigDecimal dividendVal) {
-		return financialMathCalculator.calculatePERatio(tickerPrice, dividendVal).setScale(2, BigDecimal.ROUND_HALF_UP);
+		return financialMathCalculator.calculatePERatio(tickerPrice, dividendVal);
 	}
 
 	public BigDecimal calculateAllShareIndexFrom(List<BigDecimal> stocksMarketCaps) {
 
-		return financialMathCalculator.geometricMean(stocksMarketCaps).setScale(2, BigDecimal.ROUND_HALF_UP);
+		return financialMathCalculator.geometricMean(stocksMarketCaps);
 
 	}
 

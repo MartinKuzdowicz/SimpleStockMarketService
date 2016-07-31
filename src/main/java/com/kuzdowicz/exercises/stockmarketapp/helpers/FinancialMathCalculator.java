@@ -11,8 +11,8 @@ public class FinancialMathCalculator {
 
 	public final static MathContext MATH_CONTEXT = new MathContext(BigDecimal.ROUND_HALF_UP);
 
-	public BigDecimal calculateDividendYieldForCommon(BigDecimal tickerPrice, BigDecimal latsDividenVal) {
-		return latsDividenVal.divide(tickerPrice, MATH_CONTEXT);
+	public BigDecimal calculateDividendYieldForCommon(BigDecimal tickerPrice, BigDecimal lastDividenVal) {
+		return lastDividenVal.divide(tickerPrice, MATH_CONTEXT);
 	}
 
 	public BigDecimal calculateDividendYieldForPreferred(BigDecimal tickerPrice, BigDecimal parValue,
@@ -20,12 +20,8 @@ public class FinancialMathCalculator {
 		return parValue.multiply(dividendRate, MATH_CONTEXT).divide(tickerPrice, MATH_CONTEXT);
 	}
 
-	public BigDecimal caclulateCommonDividendPerShareVal(BigDecimal tickerPrice, BigDecimal dividendRate) {
-		return tickerPrice.multiply(dividendRate, MATH_CONTEXT);
-	}
-
-	public BigDecimal caclulateFixedDividendVal(BigDecimal parValue, BigDecimal dividendRate) {
-		return parValue.multiply(dividendRate, MATH_CONTEXT);
+	public BigDecimal calculateDividendVal(BigDecimal price, BigDecimal dividendRate) {
+		return price.multiply(dividendRate, MATH_CONTEXT);
 	}
 
 	public BigDecimal calculatePERatio(BigDecimal tickerPrice, BigDecimal dividendVal) {
