@@ -11,20 +11,20 @@ import com.kuzdowicz.exercises.stockmarketapp.factories.StockFactory;
 import com.kuzdowicz.exercises.stockmarketapp.repositories.StocksRepository;
 
 @Service
-public class ExchangeAdministrator {
+public class StocksExchangeAdministrator {
 
 	private final StockFactory stockFactory;
 
 	private final StocksRepository stocksRepository;
 
-	private final StockDataService stockService;
+	private final StocksService stocksService;
 
 	@Autowired
-	public ExchangeAdministrator(StockFactory stockFactory, StocksRepository stocksRepository,
-			StockDataService stockService) {
+	public StocksExchangeAdministrator(StockFactory stockFactory, StocksRepository stocksRepository,
+			StocksService stocksService) {
 		this.stockFactory = stockFactory;
 		this.stocksRepository = stocksRepository;
-		this.stockService = stockService;
+		this.stocksService = stocksService;
 	}
 
 	public void addCommonStockToMarket(String ticker, String parVal, String lastVal, String qty, String dividendRate) {
@@ -44,14 +44,14 @@ public class ExchangeAdministrator {
 
 	public BigDecimal getAllShareIndex() {
 
-		return stockService.calculateAllShareIndex().setScale(2, BigDecimal.ROUND_HALF_UP);
+		return stocksService.calculateAllShareIndex().setScale(2, BigDecimal.ROUND_HALF_UP);
 	}
 
 	public void printCurrentStockData() {
 
 		stocksRepository.findAllTickerSymbols().forEach(tickerSym -> {
 
-			StockViewDto sqv = stockService.assemblyAllCalculationsToStockQuoteFor(tickerSym);
+			StockViewDto sqv = stocksService.assemblyAllCalculationsToStockQuoteFor(tickerSym);
 
 			String ticker = sqv.getTicker();
 			String secType = sqv.getType().name();

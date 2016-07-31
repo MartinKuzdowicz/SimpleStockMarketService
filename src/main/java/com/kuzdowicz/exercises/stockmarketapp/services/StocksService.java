@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 
 import com.kuzdowicz.exercises.stockmarketapp.dto.StockViewDto;
 
-public interface StockDataService {
+public interface StocksService {
 
-	BigDecimal calculateTickerPriceFor(String ticker, int minutes);
+	BigDecimal calculateTickerPriceFor(String ticker);
 
 	BigDecimal caclulateDividendYieldFor(String ticker, BigDecimal tickerPrice, BigDecimal latsDividenVal);
 

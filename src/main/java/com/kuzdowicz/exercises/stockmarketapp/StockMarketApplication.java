@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.kuzdowicz.exercises.stockmarketapp.config.AppConfig;
-import com.kuzdowicz.exercises.stockmarketapp.services.ExchangeAdministrator;
+import com.kuzdowicz.exercises.stockmarketapp.services.StocksExchangeAdministrator;
 import com.kuzdowicz.exercises.stockmarketapp.services.TradingService;
 
 public class StockMarketApplication {
@@ -18,7 +18,7 @@ public class StockMarketApplication {
 
 		application = new AnnotationConfigApplicationContext(AppConfig.class);
 
-		ExchangeAdministrator admin = application.getBean(ExchangeAdministrator.class);
+		StocksExchangeAdministrator admin = application.getBean(StocksExchangeAdministrator.class);
 
 		admin.addCommonStockToMarket("TEA", "0.0189", "1.78", "36590", "0.01");
 		admin.addCommonStockToMarket("POP", "0.347", "2.58", "207", "0.04");
@@ -48,10 +48,7 @@ public class StockMarketApplication {
 		admin.printCurrentStockData();
 
 		System.out.println();
-		System.out.println("Global Beverage Corporation Exchange - INDEX: ");
-		System.out.println();
-
-		System.out.println(admin.getAllShareIndex());
+		System.out.println("Global Beverage Corporation Exchange - INDEX: " + admin.getAllShareIndex());
 
 	}
 

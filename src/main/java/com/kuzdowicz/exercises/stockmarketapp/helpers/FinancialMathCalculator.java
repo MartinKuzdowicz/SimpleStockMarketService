@@ -1,13 +1,10 @@
 package com.kuzdowicz.exercises.stockmarketapp.helpers;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.MathContext;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
-
-import com.kuzdowicz.exercises.stockmarketapp.domain.Trade;
 
 @Component
 public class FinancialMathCalculator {
@@ -43,23 +40,6 @@ public class FinancialMathCalculator {
 		double geoMean = Math.pow(tickerPricesMultiplied.doubleValue(), 1.0 / stocksLastPrices.size());
 
 		return new BigDecimal(geoMean);
-
-	}
-
-	public BigDecimal calculateStockPriceFor(List<Trade> trades) {
-
-		BigDecimal sumOfAllPriceTimesQty = trades.parallelStream()//
-				.map(t -> t.getPrice().multiply(new BigDecimal(t.getQuantity(), MATH_CONTEXT)))//
-				.reduce(BigDecimal.ZERO, BigDecimal::add);
-
-		BigInteger allSharesCountInTrades = trades.stream()//
-				.map(t -> t.getQuantity())//
-				.reduce(BigInteger.ZERO, BigInteger::add);
-
-		BigDecimal currentStockPrice = sumOfAllPriceTimesQty.divide(new BigDecimal(allSharesCountInTrades),
-				MATH_CONTEXT);
-
-		return currentStockPrice;
 
 	}
 
