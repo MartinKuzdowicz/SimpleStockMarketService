@@ -27,7 +27,8 @@ public class StocksExchangeAdministrator {
 		this.stocksService = stocksService;
 	}
 
-	public void addCommonStockToMarket(String ticker, String parVal, String openingVal, String qty, String dividendRate) {
+	public void addCommonStockToMarket(String ticker, String parVal, String openingVal, String qty,
+			String dividendRate) {
 
 		Stock newCommonStock = stockFactory.createCommonStock(ticker, parVal, openingVal, qty, dividendRate);
 		stocksRepository.saveOrUpdate(newCommonStock);
@@ -48,6 +49,9 @@ public class StocksExchangeAdministrator {
 	}
 
 	public void printCurrentStockData() {
+
+		System.out.println(
+				"-----------------------------------CURRENT STOCK PRICES----------------------------------------------");
 
 		stocksRepository.findAllTickerSymbols().forEach(tickerSym -> {
 
